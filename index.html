@@ -1,10 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello courseeera</title>
-</head>
-<body>
-<h1>Hello there! What are you up to?</h1>
+  <head>
+    <title>Lunch Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <style>
+      .message { font-size: 1.3em; font-weight: bold; }
+    </style>
+      <script src="angular.min.js"></script>
+	  <script src="jquery-3.2.1.min.js"></script>
+      <script src="app.js"></script>
+  </head>
+<body ng-app="lunchChecker">
+   <div ng-controller="lunchController" class="container">
+     <h1>Lunch Checker</h1>
+
+         <div class="form-group">
+             <input ng-model="lunchItems" id="lunch-menu" type="text"
+             placeholder="list comma separated dishes you usually have for lunch"
+             class="form-control">
+         </div>
+       <div>{{lunchItems}}</div>
+         <div class="form-group">
+             <button ng-click="checkLunchItems()" class="btn btn-default">Check If Too Much</button>
+         </div>
+         <div class="form-group message">
+           <!-- Your message can go here. -->
+             {{message}}
+         </div>
+   </div>
+   
+   <button id = "surveyList" onclick="onClickSurvey()">View Survey</button>
+   
+	<script>
+		reddirectUri = encodeURI("https://www.surveymonkey.com");
+		clientId = encodeURI("urTA9AzrSXGmfDMCalUX5A");
+		responseType = "code"
+		function onClickSurvey(){
+			alert("Clicked");
+			$.ajax({
+				"url": "https://api.surveymonkey.net/oauth/token",
+				"data": {
+					"redirect_uri": reddirectUri,
+					"client_id": clientId,
+					"response_type":code
+					
+				},
+				"success": function(result){
+					alert (result);
+				}
+			});
+		}
+	</script>
 </body>
 </html>
